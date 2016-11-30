@@ -27,6 +27,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Bundle extras = getIntent().getExtras();
+        String longitude = extras.getString("EXTRA_Longitude");
+        String latitide = extras.getString("EXTRA_Latitide");
+    }
 
     /**
      * Manipulates the map once available.

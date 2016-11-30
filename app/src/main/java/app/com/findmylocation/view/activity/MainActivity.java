@@ -22,20 +22,20 @@ import app.com.findmylocation.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button mBtnSubmit;
-    private TextView mTvShowDetail;
+    private Button b;
+    private TextView t;
     private LocationManager locationManager;
     private LocationListener listener;
 
 
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
-        mTvShowDetail = (TextView) findViewById(R.id.idTv_ShowResult);
-        mBtnSubmit = (Button) findViewById(R.id.idBtn_Submit);
+        t = (TextView) findViewById(R.id.idTv_ShowResult);
+        b = (Button) findViewById(R.id.idBtn_Submit);
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                mTvShowDetail.append("\n " + location.getLongitude() + " " + location.getLatitude());
+                t.append("\n " + location.getLongitude() + " " + location.getLatitude());
             }
 
             @Override
@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProviderDisabled(String s) {
 
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
+                Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(i);
             }
         };
 
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode){
             case 10:
-                    configure_button();
+                configure_button();
                 break;
             default:
                 break;
@@ -87,8 +87,8 @@ public class MainActivity extends AppCompatActivity {
             }
             return;
         }
-        // this code won't execute IF permissions are not allowed, because in the line above there is return statement.
-        mBtnSubmit.setOnClickListener(new View.OnClickListener() {
+
+        b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //noinspection MissingPermission
@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
-
 
 
 
